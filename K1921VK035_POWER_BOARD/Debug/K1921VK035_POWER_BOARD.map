@@ -1,0 +1,511 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+SystemCoreClock     0x4               ./src/system_K1921VK035.o
+
+Discarded input sections
+
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/PWM_Control.o
+ .text          0x00000000        0x0 ./src/PWM_Control.o
+ .data          0x00000000        0x0 ./src/PWM_Control.o
+ .bss           0x00000000        0x0 ./src/PWM_Control.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .text          0x00000000        0x0 ./src/main.o
+ .data          0x00000000        0x0 ./src/main.o
+ .bss           0x00000000        0x0 ./src/main.o
+ .debug_macro   0x00000000      0xa84 ./src/main.o
+ .debug_macro   0x00000000       0x16 ./src/main.o
+ .debug_macro   0x00000000       0x22 ./src/main.o
+ .debug_macro   0x00000000       0x8e ./src/main.o
+ .debug_macro   0x00000000       0x51 ./src/main.o
+ .debug_macro   0x00000000       0xef ./src/main.o
+ .debug_macro   0x00000000       0x6a ./src/main.o
+ .debug_macro   0x00000000      0x1df ./src/main.o
+ .debug_macro   0x00000000       0x3a ./src/main.o
+ .debug_macro   0x00000000       0x3b ./src/main.o
+ .debug_macro   0x00000000       0x18 ./src/main.o
+ .debug_macro   0x00000000       0x42 ./src/main.o
+ .debug_macro   0x00000000      0xab5 ./src/main.o
+ .debug_macro   0x00000000       0x28 ./src/main.o
+ .debug_macro   0x00000000     0x5c07 ./src/main.o
+ .debug_macro   0x00000000       0x64 ./src/main.o
+ .debug_macro   0x00000000       0x18 ./src/main.o
+ .debug_macro   0x00000000       0x35 ./src/main.o
+ .debug_macro   0x00000000       0x34 ./src/main.o
+ .debug_macro   0x00000000      0x174 ./src/main.o
+ .debug_macro   0x00000000       0x58 ./src/main.o
+ .debug_macro   0x00000000       0x1f ./src/main.o
+ .debug_macro   0x00000000       0x43 ./src/main.o
+ .debug_macro   0x00000000       0x20 ./src/main.o
+ .debug_macro   0x00000000      0x18e ./src/main.o
+ .debug_macro   0x00000000      0x339 ./src/main.o
+ .debug_macro   0x00000000       0x10 ./src/main.o
+ .debug_macro   0x00000000       0x35 ./src/main.o
+ .debug_macro   0x00000000       0x3a ./src/main.o
+ .debug_macro   0x00000000      0x203 ./src/main.o
+ .debug_macro   0x00000000      0x1e1 ./src/main.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .group         0x00000000        0xc ./src/system_K1921VK035.o
+ .text          0x00000000        0x0 ./src/system_K1921VK035.o
+ .data          0x00000000        0x0 ./src/system_K1921VK035.o
+ .bss           0x00000000        0x0 ./src/system_K1921VK035.o
+ .text.SystemCoreClockUpdate
+                0x00000000       0xcc ./src/system_K1921VK035.o
+ .debug_macro   0x00000000      0xa84 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x22 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x8e ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x51 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0xef ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x6a ./src/system_K1921VK035.o
+ .debug_macro   0x00000000      0x1df ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x3a ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x3b ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x18 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000       0x42 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000      0xab5 ./src/system_K1921VK035.o
+ .debug_macro   0x00000000     0x5c07 ./src/system_K1921VK035.o
+ COMMON         0x00000000        0x4 ./src/system_K1921VK035.o
+ .data          0x00000000        0x0 ./asm/startup_K1921VK035.o
+ .bss           0x00000000        0x0 ./asm/startup_K1921VK035.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFLASH           0x00000000         0x00010000         xr
+BFLASH           0x00000000         0x00000c00         xr
+RAM              0x20000000         0x00004000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/PWM_Control.o
+LOAD ./src/main.o
+LOAD ./src/system_K1921VK035.o
+LOAD ./asm/startup_K1921VK035.o
+LOAD C:/VectorIDE1.3.3_Examples/K1921VK035_POWER_BOARD/lib/libc.a
+LOAD C:/VectorIDE1.3.3_Examples/K1921VK035_POWER_BOARD/lib/libm.a
+LOAD C:/VectorIDE1.3.3_Examples/K1921VK035_POWER_BOARD/lib/libgcc.a
+
+.text           0x00000000      0x854
+ *(.isr_vector)
+ .isr_vector    0x00000000      0x158 ./asm/startup_K1921VK035.o
+                0x00000000                __isr_vector
+ *(.text*)
+ .text.PWM_Module_Init
+                0x00000158      0x320 ./src/PWM_Control.o
+                0x00000158                PWM_Module_Init
+ .text.LED_blink
+                0x00000478       0x68 ./src/main.o
+                0x00000478                LED_blink
+ .text.main     0x000004e0      0x1bc ./src/main.o
+                0x000004e0                main
+ .text.ClkInit  0x0000069c       0xf8 ./src/system_K1921VK035.o
+                0x0000069c                ClkInit
+ .text.FPUInit  0x00000794       0x24 ./src/system_K1921VK035.o
+                0x00000794                FPUInit
+ .text.PeripheralClockEnable
+                0x000007b8       0x38 ./src/system_K1921VK035.o
+                0x000007b8                PeripheralClockEnable
+ .text.SystemInit
+                0x000007f0       0x14 ./src/system_K1921VK035.o
+                0x000007f0                SystemInit
+ .text          0x00000804       0x50 ./asm/startup_K1921VK035.o
+                0x00000804                Reset_Handler
+                0x00000850                DebugMon_Handler
+                0x00000850                CAN5_IRQHandler
+                0x00000850                HardFault_Handler
+                0x00000850                GPIOB_IRQHandler
+                0x00000850                QEP_IRQHandler
+                0x00000850                GPIOA_IRQHandler
+                0x00000850                SysTick_Handler
+                0x00000850                PWM1_IRQHandler
+                0x00000850                PWM2_HD_IRQHandler
+                0x00000850                PendSV_Handler
+                0x00000850                NMI_Handler
+                0x00000850                ADC_SEQ1_IRQHandler
+                0x00000850                CAN12_IRQHandler
+                0x00000850                CAN1_IRQHandler
+                0x00000850                DMA_CH9_IRQHandler
+                0x00000850                DMA_CH12_IRQHandler
+                0x00000850                ADC_SEQ0_IRQHandler
+                0x00000850                UART0_TD_IRQHandler
+                0x00000850                DMA_CH4_IRQHandler
+                0x00000850                DMA_CH10_IRQHandler
+                0x00000850                ECAP2_IRQHandler
+                0x00000850                FPU_IRQHandler
+                0x00000850                DMA_CH2_IRQHandler
+                0x00000850                CAN3_IRQHandler
+                0x00000850                UsageFault_Handler
+                0x00000850                MFLASH_IRQHandler
+                0x00000850                DMA_CH1_IRQHandler
+                0x00000850                CAN11_IRQHandler
+                0x00000850                TMR0_IRQHandler
+                0x00000850                UART1_TD_IRQHandler
+                0x00000850                UART0_TX_IRQHandler
+                0x00000850                UART1_TX_IRQHandler
+                0x00000850                UART0_E_RT_IRQHandler
+                0x00000850                DMA_CH11_IRQHandler
+                0x00000850                UART0_RX_IRQHandler
+                0x00000850                PWM2_IRQHandler
+                0x00000850                Default_Handler
+                0x00000850                DMA_CH15_IRQHandler
+                0x00000850                SPI_RX_IRQHandler
+                0x00000850                DMA_CH14_IRQHandler
+                0x00000850                PWM0_HD_IRQHandler
+                0x00000850                TMR2_IRQHandler
+                0x00000850                CAN13_IRQHandler
+                0x00000850                ECAP0_IRQHandler
+                0x00000850                PWM1_TZ_IRQHandler
+                0x00000850                SPI_RO_RT_IRQHandler
+                0x00000850                DMA_CH7_IRQHandler
+                0x00000850                UART1_E_RT_IRQHandler
+                0x00000850                CAN14_IRQHandler
+                0x00000850                I2C_IRQHandler
+                0x00000850                MemManage_Handler
+                0x00000850                CAN6_IRQHandler
+                0x00000850                WDT_IRQHandler
+                0x00000850                SVC_Handler
+                0x00000850                DMA_CH13_IRQHandler
+                0x00000850                CAN8_IRQHandler
+                0x00000850                SPI_TX_IRQHandler
+                0x00000850                DMA_CH8_IRQHandler
+                0x00000850                PWM1_HD_IRQHandler
+                0x00000850                ADC_DC_IRQHandler
+                0x00000850                UART1_RX_IRQHandler
+                0x00000850                PWM0_IRQHandler
+                0x00000850                CAN10_IRQHandler
+                0x00000850                CAN0_IRQHandler
+                0x00000850                CAN15_IRQHandler
+                0x00000850                TMR3_IRQHandler
+                0x00000850                RCU_IRQHandler
+                0x00000850                PWM2_TZ_IRQHandler
+                0x00000850                CAN9_IRQHandler
+                0x00000850                PWM0_TZ_IRQHandler
+                0x00000850                DMA_CH6_IRQHandler
+                0x00000850                DMA_CH3_IRQHandler
+                0x00000850                ECAP1_IRQHandler
+                0x00000850                CAN2_IRQHandler
+                0x00000850                CAN7_IRQHandler
+                0x00000850                CAN4_IRQHandler
+                0x00000850                BusFault_Handler
+                0x00000850                DMA_CH0_IRQHandler
+                0x00000850                TMR1_IRQHandler
+                0x00000850                DMA_CH5_IRQHandler
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ *(.eh_frame*)
+
+.glue_7         0x00000854        0x0
+ .glue_7        0x00000854        0x0 linker stubs
+
+.glue_7t        0x00000854        0x0
+ .glue_7t       0x00000854        0x0 linker stubs
+
+.vfp11_veneer   0x00000854        0x0
+ .vfp11_veneer  0x00000854        0x0 linker stubs
+
+.v4_bx          0x00000854        0x0
+ .v4_bx         0x00000854        0x0 linker stubs
+
+.iplt           0x00000854        0x0
+ .iplt          0x00000854        0x0 ./src/PWM_Control.o
+
+.rel.dyn        0x00000854        0x0
+ .rel.iplt      0x00000854        0x0 ./src/PWM_Control.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x00000854                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x00000854                __exidx_end = .
+
+.copy.table     0x00000854        0xc
+                0x00000854                . = ALIGN (0x4)
+                0x00000868                __textdata_start__ = LOADADDR (.data)
+                0x00000854                __copy_table_start__ = .
+                0x00000854        0x4 LONG 0x868 __textdata_start__
+                0x00000858        0x4 LONG 0x20000000 __data_start__
+                0x0000085c        0x4 LONG 0x104 (__data_end__ - __data_start__)
+                0x00000860                __copy_table_end__ = .
+
+.zero.table     0x00000860        0x8
+                0x00000860                . = ALIGN (0x4)
+                0x00000860                __zero_table_start__ = .
+                0x00000860        0x4 LONG 0x20000104 __bss_start__
+                0x00000864        0x4 LONG 0x1c (__bss_end__ - __bss_start__)
+                0x00000868                __zero_table_end__ = .
+                0x00000868                . = ALIGN (0x4)
+
+.data           0x20000000      0x104 load address 0x00000868
+                0x20000000                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data.Sin_Table256
+                0x20000000      0x100 ./src/main.o
+                0x20000000                Sin_Table256
+ .data.TimerPeriod
+                0x20000100        0x4 ./src/main.o
+                0x20000100                TimerPeriod
+ *(.ramfunc*)
+                0x20000104                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                PROVIDE (__preinit_array_end = .)
+                0x20000104                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                PROVIDE (__init_array_end = .)
+                0x20000104                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                PROVIDE (__fini_array_end = .)
+ *(.jcr*)
+                0x20000104                . = ALIGN (0x4)
+                0x20000104                __data_end__ = .
+
+.igot.plt       0x20000104        0x0 load address 0x0000096c
+ .igot.plt      0x20000104        0x0 ./src/PWM_Control.o
+
+.bss            0x20000104       0x1c load address 0x0000096c
+                0x20000104                . = ALIGN (0x4)
+                0x20000104                __bss_start__ = .
+ *(.bss*)
+ .bss.i         0x20000104        0x1 ./src/main.o
+                0x20000104                i
+ *fill*         0x20000105        0x3 
+ .bss.acc       0x20000108        0x4 ./src/main.o
+                0x20000108                acc
+ .bss.Count_PHA
+                0x2000010c        0x1 ./src/main.o
+                0x2000010c                Count_PHA
+ .bss.Count_PHB
+                0x2000010d        0x1 ./src/main.o
+                0x2000010d                Count_PHB
+ .bss.Count_PHC
+                0x2000010e        0x1 ./src/main.o
+                0x2000010e                Count_PHC
+ *fill*         0x2000010f        0x1 
+ .bss.ledState  0x20000110        0x4 ./src/main.o
+                0x20000110                ledState
+ .bss.ButtonState
+                0x20000114        0x4 ./src/main.o
+                0x20000114                ButtonState
+ .bss.ButtonClickFlag
+                0x20000118        0x4 ./src/main.o
+                0x20000118                ButtonClickFlag
+ .bss.timer.12111
+                0x2000011c        0x4 ./src/main.o
+ *(COMMON)
+                0x20000120                . = ALIGN (0x4)
+                0x20000120                __bss_end__ = .
+
+.heap           0x20000120        0x0 load address 0x0000096c
+                0x20000120                __end__ = .
+                [!provide]                PROVIDE (end = .)
+ *(.heap*)
+ .heap          0x20000120        0x0 ./asm/startup_K1921VK035.o
+                0x20000120                __HeapLimit = .
+
+.stack_dummy    0x20000120      0xc00 load address 0x0000096c
+ *(.stack*)
+ .stack         0x20000120      0xc00 ./asm/startup_K1921VK035.o
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+                0x20004000                __StackTop = (ORIGIN (STACK_RAM) + LENGTH (STACK_RAM))
+                0x20003400                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
+                [!provide]                PROVIDE (__stack = __StackTop)
+                0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region STACK_RAM overflowed with stack)
+OUTPUT(K1921VK035_POWER_BOARD.elf elf32-littlearm)
+
+.debug_info     0x00000000     0xdc03
+ .debug_info    0x00000000     0x6294 ./src/PWM_Control.o
+ .debug_info    0x00006294     0x6323 ./src/main.o
+ .debug_info    0x0000c5b7     0x1626 ./src/system_K1921VK035.o
+ .debug_info    0x0000dbdd       0x26 ./asm/startup_K1921VK035.o
+
+.debug_abbrev   0x00000000      0x73c
+ .debug_abbrev  0x00000000      0x272 ./src/PWM_Control.o
+ .debug_abbrev  0x00000272      0x2b2 ./src/main.o
+ .debug_abbrev  0x00000524      0x204 ./src/system_K1921VK035.o
+ .debug_abbrev  0x00000728       0x14 ./asm/startup_K1921VK035.o
+
+.debug_aranges  0x00000000       0xa8
+ .debug_aranges
+                0x00000000       0x20 ./src/PWM_Control.o
+ .debug_aranges
+                0x00000020       0x28 ./src/main.o
+ .debug_aranges
+                0x00000048       0x40 ./src/system_K1921VK035.o
+ .debug_aranges
+                0x00000088       0x20 ./asm/startup_K1921VK035.o
+
+.debug_ranges   0x00000000       0x58
+ .debug_ranges  0x00000000       0x10 ./src/PWM_Control.o
+ .debug_ranges  0x00000010       0x18 ./src/main.o
+ .debug_ranges  0x00000028       0x30 ./src/system_K1921VK035.o
+
+.debug_macro    0x00000000     0x8733
+ .debug_macro   0x00000000      0x1b2 ./src/PWM_Control.o
+ .debug_macro   0x000001b2      0xa84 ./src/PWM_Control.o
+ .debug_macro   0x00000c36       0x16 ./src/PWM_Control.o
+ .debug_macro   0x00000c4c       0x22 ./src/PWM_Control.o
+ .debug_macro   0x00000c6e       0x8e ./src/PWM_Control.o
+ .debug_macro   0x00000cfc       0x51 ./src/PWM_Control.o
+ .debug_macro   0x00000d4d       0xef ./src/PWM_Control.o
+ .debug_macro   0x00000e3c       0x6a ./src/PWM_Control.o
+ .debug_macro   0x00000ea6      0x1df ./src/PWM_Control.o
+ .debug_macro   0x00001085       0x3a ./src/PWM_Control.o
+ .debug_macro   0x000010bf       0x3b ./src/PWM_Control.o
+ .debug_macro   0x000010fa       0x18 ./src/PWM_Control.o
+ .debug_macro   0x00001112       0x42 ./src/PWM_Control.o
+ .debug_macro   0x00001154      0xab5 ./src/PWM_Control.o
+ .debug_macro   0x00001c09       0x28 ./src/PWM_Control.o
+ .debug_macro   0x00001c31     0x5c07 ./src/PWM_Control.o
+ .debug_macro   0x00007838       0x64 ./src/PWM_Control.o
+ .debug_macro   0x0000789c       0x18 ./src/PWM_Control.o
+ .debug_macro   0x000078b4       0x35 ./src/PWM_Control.o
+ .debug_macro   0x000078e9       0x34 ./src/PWM_Control.o
+ .debug_macro   0x0000791d      0x174 ./src/PWM_Control.o
+ .debug_macro   0x00007a91       0x58 ./src/PWM_Control.o
+ .debug_macro   0x00007ae9       0x1f ./src/PWM_Control.o
+ .debug_macro   0x00007b08       0x43 ./src/PWM_Control.o
+ .debug_macro   0x00007b4b       0x20 ./src/PWM_Control.o
+ .debug_macro   0x00007b6b      0x18e ./src/PWM_Control.o
+ .debug_macro   0x00007cf9      0x339 ./src/PWM_Control.o
+ .debug_macro   0x00008032       0x10 ./src/PWM_Control.o
+ .debug_macro   0x00008042       0x35 ./src/PWM_Control.o
+ .debug_macro   0x00008077       0x3a ./src/PWM_Control.o
+ .debug_macro   0x000080b1      0x203 ./src/PWM_Control.o
+ .debug_macro   0x000082b4      0x1e1 ./src/PWM_Control.o
+ .debug_macro   0x00008495      0x1ce ./src/main.o
+ .debug_macro   0x00008663       0xae ./src/system_K1921VK035.o
+ .debug_macro   0x00008711       0x22 ./src/system_K1921VK035.o
+
+.debug_line     0x00000000      0xf98
+ .debug_line    0x00000000      0x5e2 ./src/PWM_Control.o
+ .debug_line    0x000005e2      0x4c3 ./src/main.o
+ .debug_line    0x00000aa5      0x47d ./src/system_K1921VK035.o
+ .debug_line    0x00000f22       0x76 ./asm/startup_K1921VK035.o
+
+.debug_str      0x00000000    0x267a4
+ .debug_str     0x00000000    0x262da ./src/PWM_Control.o
+                              0x265a5 (size before relaxing)
+ .debug_str     0x000262da       0xdc ./src/main.o
+                              0x264d7 (size before relaxing)
+ .debug_str     0x000263b6      0x3c3 ./src/system_K1921VK035.o
+                              0x21a1b (size before relaxing)
+ .debug_str     0x00026779       0x2b ./asm/startup_K1921VK035.o
+                                 0x62 (size before relaxing)
+
+.comment        0x00000000       0x68
+ .comment       0x00000000       0x68 ./src/PWM_Control.o
+                                 0x69 (size before relaxing)
+ .comment       0x00000068       0x69 ./src/main.o
+ .comment       0x00000068       0x69 ./src/system_K1921VK035.o
+
+.ARM.attributes
+                0x00000000       0x32
+ .ARM.attributes
+                0x00000000       0x34 ./src/PWM_Control.o
+ .ARM.attributes
+                0x00000034       0x34 ./src/main.o
+ .ARM.attributes
+                0x00000068       0x34 ./src/system_K1921VK035.o
+ .ARM.attributes
+                0x0000009c       0x20 ./asm/startup_K1921VK035.o
+
+.debug_frame    0x00000000      0x13c
+ .debug_frame   0x00000000       0x34 ./src/PWM_Control.o
+ .debug_frame   0x00000034       0x4c ./src/main.o
+ .debug_frame   0x00000080       0xbc ./src/system_K1921VK035.o
