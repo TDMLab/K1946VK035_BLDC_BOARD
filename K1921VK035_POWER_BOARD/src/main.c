@@ -1,12 +1,12 @@
 /******************************************************************************
  * @file        main.c
- * @brief       Главный файл проекта
- * @version     v1.0
+ * @brief       BLDC PWM control
+ * @version     v1.1
  * @date        19.04.25
  *
  * @note TDM LAB
  *
- * Пример работы 3-х фазной ШИМ
+ * 3-phase PWM sine demo with TZ overcurrent protection
  ******************************************************************************/
 
 #include "main.h"
@@ -14,10 +14,14 @@
 
 #define PIN_PORT GPIOA
 #define LED_PIN 14
-#define BUTTON_PIN 15
+#define LED2_PIN 15
 
 #define BLINK_FAST 200000
 #define BLINK_SLOW 1000000
+#define FAULT_BLINK_PERIOD 500000
+
+volatile fsm_state_t g_foc_state = STATE_NORMAL;
+volatile uint32_t fault_led_timer = 0;
 
 uint8_t Sin_Table256[256] = {
 128,131,134,137,140,143,146,149,152,156,159,162,165,168,171,174,176,179,182,185,188,191,193,196,199,201,204,206,209,211,213,216,
@@ -37,17 +41,12 @@ uint8_t Count_PHA = 0;
 uint8_t Count_PHB = 0;
 uint8_t Count_PHC = 0;
 
-//Глобальная переменная периода счета таймера (может быть изменена при остановке расчета в окне просмотра переменных)
 int TimerPeriod = BLINK_FAST;
 
-// Глобальная переменная для хранения состояния светодиода
 int ledState = 0;
-int ButtonState = 0;
-int ButtonClickFlag = 0;
 
-//Функция мигания светодиодом
-void LED_blink (void) {
-    static int timer;   //переменная таймера
+void LED_blink(void) {
+    static int timer;
     if (timer > TimerPeriod) {
         timer = 0;
         ledState ^= 0x1;
@@ -60,47 +59,58 @@ void LED_blink (void) {
     timer++;
 }
 
-int16 main (void){
-//    DINT;
-    //Инициализация микроконтроллера: настройка таймеров, инициализаци периферийных устройств
+void LED2_fault_blink(void) {
+    fault_led_timer++;
+    if (fault_led_timer > FAULT_BLINK_PERIOD) {
+        fault_led_timer = 0;
+        GPIOA->DATA ^= (1 << LED2_PIN);
+    }
+}
+
+void PWM0_TZ_IRQHandler(void) {
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+    PWM0->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM0_TZ_IRQn);
+}
+
+void PWM1_TZ_IRQHandler(void) {
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+    PWM1->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM1_TZ_IRQn);
+}
+
+void PWM2_TZ_IRQHandler(void) {
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+    PWM2->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM2_TZ_IRQn);
+}
+
+int16 main(void) {
     SystemInit();
-/*
- *
-    CLKOUTCTL Регистр настройки выдачи тактового сигнала, ножка SERVEN
-    CLKOUTCFG Регистр настройки выходного тактового сигнала
-    0x0101 выход PLL без деления PLLCLK
-    0x0201 выход частоты кварца OSECLK
-*/
+
     SIU->CLKOUTCTL = (1 << 0);
     RCU->CLKOUTCFG = 0x0101;
 
-    //Инициализация периферии для управления светодиодами
-    GPIOA->DENSET = (1 << LED_PIN | 1 << BUTTON_PIN);   // Регистр разрешения цифровой функции порта
-    GPIOA->OUTENSET = (1 << LED_PIN);                   // Ножка настраивается на выход
-    GPIOA->ALTFUNCCLR = (1 << LED_PIN);
-//   GPIOA->PULLMODE |= (1 << 28);                       // Подтягиваем PA14 Pull-up
+    GPIOA->DENSET = (1 << LED_PIN | 1 << LED2_PIN);
+    GPIOA->OUTENSET = (1 << LED_PIN | 1 << LED2_PIN);
+    GPIOA->ALTFUNCCLR = (1 << LED_PIN | 1 << LED2_PIN);
 
-    GPIOA->PULLMODE |= (1 << 31);                       // Подтягиваем PA15 Pull-down
-
-    GPIOA->QUALSET |= (1 << BUTTON_PIN);                // Регистр включения фильтров портов
-    GPIOA->QUALMODESET |= (1 << BUTTON_PIN);            // Режим измерения уровня входа по 6 отсчетам
-    GPIOA->QUALSAMPLE = 255;                            // Регистр настройки фильтра порта, значение в тактах FCLK
-
-//    pwm0_init();
     PWM_Module_Init();
 
-//    PWM0->FWDTH = 255;
-//    PWM1->FWDTH = 255;
-//    PWM2->FWDTH = 255;
+    tz_config_t tz_cfg;
+    tz_cfg.mode = TZ_MODE_ONE_SHOT;
+    tz_cfg.filter_width = 15;
+    tz_cfg.tza_action = TZ_FORCE_LO;
+    tz_cfg.tzb_action = TZ_FORCE_LO;
+    PWM_TZ_Protection_Init(&tz_cfg);
 
-//    EINT;//разрешение прерываний
+    EINT;
 
-
-    while(1)
-    {
-//        PWM0->CMPA_bit.CMPA = 781;
-//        PWM1->CMPA_bit.CMPA = 1562;
-//        PWM2->CMPA_bit.CMPA = 2343;
+    while (1) {
+        if (g_foc_state == STATE_OVERCURRENT_FAULT) {
+            LED2_fault_blink();
+            continue;
+        }
 
         Count_PHA = i + 85;
         Count_PHB = i;
@@ -113,26 +123,7 @@ int16 main (void){
         i = acc >> 14;
         acc++;
 
-        if((GPIOA->DATA & (1 << BUTTON_PIN)) != 0 && ButtonClickFlag == 0) {
-            ButtonClickFlag = 1;
-            ButtonState++;
-            if (ButtonState > 1){
-                ButtonState = 0;
-            }
-
-            if(ButtonState == 1){
-                TimerPeriod = BLINK_FAST;
-                RCU->CLKOUTCFG = 0x0201;
-            }
-            else {
-                TimerPeriod = BLINK_SLOW;
-                RCU->CLKOUTCFG = 0x0101;
-            }
-        }
-        else if ((GPIOA->DATA & (1 << BUTTON_PIN)) == 0) {
-            ButtonClickFlag = 0;
-        }
-        LED_blink();    // Мигание светодиодом
+        LED_blink();
     }
 }
 
