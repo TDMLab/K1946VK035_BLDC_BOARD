@@ -67,23 +67,7 @@ void LED2_fault_blink(void) {
     }
 }
 
-void PWM0_TZ_IRQHandler(void) {
-    g_foc_state = STATE_OVERCURRENT_FAULT;
-    PWM0->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM0_TZ_IRQn);
-}
 
-void PWM1_TZ_IRQHandler(void) {
-    g_foc_state = STATE_OVERCURRENT_FAULT;
-    PWM1->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM1_TZ_IRQn);
-}
-
-void PWM2_TZ_IRQHandler(void) {
-    g_foc_state = STATE_OVERCURRENT_FAULT;
-    PWM2->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM2_TZ_IRQn);
-}
 
 int16 main(void) {
     SystemInit();
@@ -107,24 +91,82 @@ int16 main(void) {
     EINT;
 
     while (1) {
-        if (g_foc_state == STATE_OVERCURRENT_FAULT) {
-            LED2_fault_blink();
-            continue;
+        // if (g_foc_state == STATE_OVERCURRENT_FAULT) {
+        //     LED2_fault_blink();
+        //     continue;
+        // }
+
+        // Count_PHA = i + 85;
+        // Count_PHB = i;
+        // Count_PHC = i + 171;
+
+        // PWM0->CMPA_bit.CMPA = Sin_Table256[Count_PHA] * 3061UL / 256 + 1;
+        // PWM1->CMPA_bit.CMPA = Sin_Table256[Count_PHB] * 3061UL / 256 + 1;
+        // PWM2->CMPA_bit.CMPA = Sin_Table256[Count_PHC] * 3061UL / 256 + 1;
+
+        // i = acc >> 14;
+        // acc++;
+        if(g_foc_state == STATE_OVERCURRENT_FAULT) {
+            LED_blink();
         }
-
-        Count_PHA = i + 85;
-        Count_PHB = i;
-        Count_PHC = i + 171;
-
-        PWM0->CMPA_bit.CMPA = Sin_Table256[Count_PHA] * 3061UL / 256 + 1;
-        PWM1->CMPA_bit.CMPA = Sin_Table256[Count_PHB] * 3061UL / 256 + 1;
-        PWM2->CMPA_bit.CMPA = Sin_Table256[Count_PHC] * 3061UL / 256 + 1;
-
-        i = acc >> 14;
-        acc++;
-
-        LED_blink();
+        
     }
 }
 
+void PWM0_TZ_IRQHandler(void) {
+    if (PWM0->TZFLG_bit.OST) {
+        PWM0->TZCLR_bit.OST = 1;
+    }
+    PWM0->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM0_TZ_IRQn);
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+        //INTCLR? 
+}
+
+void PWM1_TZ_IRQHandler(void) {
+    if (PWM1->TZFLG_bit.OST) {
+        PWM1->TZCLR_bit.OST = 1;
+    }
+    PWM1->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM1_TZ_IRQn);
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+        //INTCLR? 
+}
+
+void PWM2_TZ_IRQHandler(void) {
+    if (PWM2->TZFLG_bit.OST) {
+        PWM2->TZCLR_bit.OST = 1;
+    }
+    PWM2->TZINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM2_TZ_IRQn);
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+        //INTCLR? 
+}
+
+void PWM0_HD_IRQHandler(void) {
+    if (PWM0->HDFLG_bit.OST) {
+        PWM0->HDCLR_bit.OST = 1;
+    }
+    PWM0->HDINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM0_HD_IRQn);
+        //INTCLR? 
+}
+
+void PWM1_HD_IRQHandler(void) {
+    if (PWM1->HDFLG_bit.OST) {
+        PWM1->HDCLR_bit.OST = 1;
+    }
+    PWM1->HDINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM1_HD_IRQn);
+        //INTCLR? 
+}
+
+void PWM2_HD_IRQHandler(void) {
+    if (PWM2->HDFLG_bit.OST) {
+        PWM2->HDCLR_bit.OST = 1;
+    }
+    PWM2->HDINTCLR_bit.INT = 1;
+    NVIC_ClearPendingIRQ(PWM2_HD_IRQn);
+    //INTCLR? 
+}
 /*@}*/
