@@ -26,7 +26,7 @@ typedef struct {
 } tz_config_t;
 
 void PWM_Module_Init(void);
-void PWM_TZ_Protection_Init(const tz_config_t *cfg);
+void PWM_TZ_Protection_Init(void);
 // Set TZ input filter width in nanoseconds for all PWM modules
 void PWM_TZ_SetFilter_ns(uint32_t ns);
 
@@ -34,7 +34,7 @@ void PWM_TZ_SetFilter_ns(uint32_t ns);
 // Configures PB0, PB1, PB2 as ADC channels 0, 1, 2 with digital comparators
 // Triggers on N consecutive samples >= highThreshold (code 4095 = full scale)
 // Returns 1 on success, 0 on invalid parameters
-uint8_t ADC_DC_Overcurrent_Init(uint8_t alertEvents, uint16_t highThreshold, uint16_t lowThreshold);
+uint8_t ADC_DC_Overcurrent_Init();
 void ADC_DC_IRQHandler(void);
 
 // ADC FOC initialization

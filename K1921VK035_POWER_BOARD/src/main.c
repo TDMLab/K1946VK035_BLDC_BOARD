@@ -81,12 +81,9 @@ int16 main(void) {
 
     PWM_Module_Init();
 
-    tz_config_t tz_cfg;
-    tz_cfg.mode = TZ_MODE_ONE_SHOT;
-    tz_cfg.filter_width = 15;
-    tz_cfg.tza_action = TZ_FORCE_LO;
-    tz_cfg.tzb_action = TZ_FORCE_LO;
-    PWM_TZ_Protection_Init(&tz_cfg);
+    PWM_TZ_Protection_Init(); 
+    PWM_HD_Protection_Init();
+    ADC_DC_Overcurrent_Init();
 
     EINT;
 

@@ -149,7 +149,7 @@ void PWM_Module_Init(void)
      SIU->PWMSYNC_bit.PRESCRST = 0b111;
 }
 
-void PWM_TZ_Protection_Init(const tz_config_t *cfg)
+void PWM_TZ_Protection_Init()
 {
     PWM0->TZSEL_bit.OST = 1;
     PWM1->TZSEL_bit.OST = 1;
@@ -172,7 +172,6 @@ void PWM_TZ_Protection_Init(const tz_config_t *cfg)
     GPIOA->QUALSET_bit.PIN_(PWM_TZ_PIN) = 1;
     GPIOA->QUALMODECLR_bit.PIN_(PWM_TZ_PIN) = 1;
     GPIOA->QUALSAMPLE_bit.VAL = 9;
-    (void)cfg;
 }
 
 void PWM_HD_Protection_Init()
@@ -195,12 +194,8 @@ void PWM_HD_Protection_Init()
 
 }
 
-uint8_t ADC_DC_Overcurrent_Init(uint8_t alertEvents, uint16_t highThreshold, uint16_t lowThreshold)
+uint8_t ADC_DC_Overcurrent_Init()
 {
-    if((highThreshold < lowThreshold) || (alertEvents == 0)) {
-        return 0;
-    }
-
     RCU->ADCCFG_bit.CLKEN = 1;
     RCU->ADCCFG_bit.RSTDIS = 1;
     RCU->ADCCFG_bit.CLKSEL = 1;
@@ -215,7 +210,7 @@ uint8_t ADC_DC_Overcurrent_Init(uint8_t alertEvents, uint16_t highThreshold, uin
     ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
     ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
     ADC->SEQ[0].SRQCTL_bit.RQMAX = 2;
-    ADC->SEQ[0].SCCTL_bit.ICNT = alertEvents - 1;
+    ADC->SEQ[0].SCCTL_bit.ICNT = 1;
     ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
     ADC->EMUX_bit.EM0 = 0;
 
@@ -223,14 +218,16 @@ uint8_t ADC_DC_Overcurrent_Init(uint8_t alertEvents, uint16_t highThreshold, uin
         ADC->DC[i].DCTL_bit.SRC = 1;
         ADC->DC[i].DCTL_bit.CHNL = i;
         ADC->DC[i].DCTL_bit.CIM = 0;
-        ADC->DC[i].DCTL_bit.CIC = 2;
+        ADC->DC[i].DCTL_bit.CIC = 0;
         ADC->DC[i].DCTL_bit.CIE = 1;
         ADC->DC[i].DCTL_bit.CTM = 0;
         ADC->DC[i].DCTL_bit.CTC = 2;
-        ADC->DC[i].DCTL_bit.CTE = 0;
-        ADC->DC[i].DCMP_bit.CMPL = lowThreshold;
-        ADC->DC[i].DCMP_bit.CMPH = highThreshold;
+        ADC->DC[i].DCTL_bit.CTE = 1;
+        ADC->DC[i].DCMP_bit.CMPL = 0;
+        ADC->DC[i].DCMP_bit.CMPH = 4095;
     }
+
+    //for measure >= cmph - int, for measure <=cmpl - trig
 
     ADC->SEQ[0].SDC_bit.DC0 = 1;
     ADC->SEQ[0].SDC_bit.DC1 = 1;
@@ -242,6 +239,7 @@ uint8_t ADC_DC_Overcurrent_Init(uint8_t alertEvents, uint16_t highThreshold, uin
     NVIC_EnableIRQ(ADC_DC_IRQn);
     return 1;
 }
+
 
 void ADC_DC_IRQHandler(void)
 {
