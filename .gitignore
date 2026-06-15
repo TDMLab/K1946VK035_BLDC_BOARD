@@ -1,0 +1,27 @@
+# Build artifacts
+build/
+cmake-build-*/
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+*.o
+*.obj
+*.a
+*.lib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug
+Debug/
+Release/
