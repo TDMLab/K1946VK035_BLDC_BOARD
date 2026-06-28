@@ -115,9 +115,7 @@ void PWM0_TZ_IRQHandler(void) {
         PWM0->TZCLR_bit.OST = 1;
     }
     PWM0->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM0_TZ_IRQn);
     g_foc_state = STATE_OVERCURRENT_FAULT;
-        //INTCLR? 
 }
 
 void PWM1_TZ_IRQHandler(void) {
@@ -125,9 +123,7 @@ void PWM1_TZ_IRQHandler(void) {
         PWM1->TZCLR_bit.OST = 1;
     }
     PWM1->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM1_TZ_IRQn);
     g_foc_state = STATE_OVERCURRENT_FAULT;
-        //INTCLR? 
 }
 
 void PWM2_TZ_IRQHandler(void) {
@@ -135,9 +131,7 @@ void PWM2_TZ_IRQHandler(void) {
         PWM2->TZCLR_bit.OST = 1;
     }
     PWM2->TZINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM2_TZ_IRQn);
     g_foc_state = STATE_OVERCURRENT_FAULT;
-        //INTCLR? 
 }
 
 void PWM0_HD_IRQHandler(void) {
@@ -145,8 +139,7 @@ void PWM0_HD_IRQHandler(void) {
         PWM0->HDCLR_bit.OST = 1;
     }
     PWM0->HDINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM0_HD_IRQn);
-        //INTCLR? 
+    g_foc_state = STATE_OVERCURRENT_FAULT;
 }
 
 void PWM1_HD_IRQHandler(void) {
@@ -154,8 +147,7 @@ void PWM1_HD_IRQHandler(void) {
         PWM1->HDCLR_bit.OST = 1;
     }
     PWM1->HDINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM1_HD_IRQn);
-        //INTCLR? 
+    g_foc_state = STATE_OVERCURRENT_FAULT;
 }
 
 void PWM2_HD_IRQHandler(void) {
@@ -163,7 +155,26 @@ void PWM2_HD_IRQHandler(void) {
         PWM2->HDCLR_bit.OST = 1;
     }
     PWM2->HDINTCLR_bit.INT = 1;
-    NVIC_ClearPendingIRQ(PWM2_HD_IRQn);
-    //INTCLR? 
+    g_foc_state = STATE_OVERCURRENT_FAULT;
+}
+
+void ADC_DC_IRQHandler(void)
+{
+    if (ADC->DCTRIG_bit.DCEV0) {
+        ADC->IC_bit.DCIC0 = 1;
+        g_foc_state = STATE_OVERCURRENT_FAULT;
+    }
+    if (ADC->DCTRIG_bit.DCEV1) {
+        ADC->IC_bit.DCIC1 = 1;
+        g_foc_state = STATE_OVERCURRENT_FAULT;
+    }
+    if (ADC->DCTRIG_bit.DCEV2) {
+        ADC->IC_bit.DCIC2 = 1;
+        g_foc_state = STATE_OVERCURRENT_FAULT;
+    }
+    if (ADC->DCTRIG_bit.DCEV3) {
+        ADC->IC_bit.DCIC3 = 1;
+        g_foc_state = STATE_OVERCURRENT_FAULT;
+    }
 }
 /*@}*/

@@ -27,6 +27,7 @@ typedef struct {
 
 void PWM_Module_Init(void);
 void PWM_TZ_Protection_Init(void);
+void PWM_HD_Protection_Init(void);
 // Set TZ input filter width in nanoseconds for all PWM modules
 void PWM_TZ_SetFilter_ns(uint32_t ns);
 

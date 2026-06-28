@@ -19,7 +19,7 @@ void PWM_Module_Init(void)
      GPIO_ALTFUNCSET_PIN10_Msk | GPIO_ALTFUNCSET_PIN11_Msk | GPIO_ALTFUNCSET_PIN12_Msk | GPIO_ALTFUNCSET_PIN13_Msk;
 
  // ------------------------------------------------------------------------
- // ����������� ������ ePWM0
+
  // ------------------------------------------------------------------------
 
      SIU->PWMSYNC_bit.PRESCRST = 0;                      // Reset PWM prescaler
@@ -55,14 +55,14 @@ void PWM_Module_Init(void)
      RCU->PRSTCFG_bit.PWM0EN = 1;
      PWM0->CMPA_bit.CMPA = 0;
      PWM0->CMPB_bit.CMPB = 0;
-     PWM0->TBPRD = 3125; // 16 ���
+     PWM0->TBPRD = 3125;
 
      // Dead-time configuration
-     // DBRED = DBFED = T�_��� * 100
+
       // => Dead-time = DBRED / 100
      PWM0->DBRED = 50;
      PWM0->DBFED = PWM0->DBRED;
-     // ��������� ������ ������� �������:
+
       // INMODE: S5=0 S4=0 - Input from PWMxA, filtered
       //         Input source: PWMxA
       // POLSEL: S3 = 1 S2 = 1 - Active high for PWMxA, active low for PWMxB
@@ -83,21 +83,21 @@ void PWM_Module_Init(void)
  // ------------------------------------------------------------------------
      // Setup TBCLK
 
-     PWM1->TBPRD = PWM0->TBPRD;                              // ������ ����� �� ��� � PWM0
-     PWM1->TBPHS_bit.TBPHS = 0x0001;                         // ���� ����� 1 ��-�� �������� � ���� ���� �� �������������
+     PWM1->TBPRD = PWM0->TBPRD;
+     PWM1->TBPHS_bit.TBPHS = 0x0001;
      PWM1->TBCTR = 0x0000;                                   // Clear counter
       // Configure time-base
-     PWM1->TBCTL_bit.PRDLD = TB_SHADOW;                      // �������� TBPRD ��� TBCTR = 0
-     PWM1->TBCTL_bit.CTRMODE = TB_COUNT_UPDOWN;              // ���� �����-����
-     PWM1->TBCTL_bit.PHSEN = TB_ENABLE;                      // ��������� �������������
-     PWM1->TBCTL_bit.PHSDIR = TB_UP;                         // ������� ����� ����� �������� ����
-     PWM1->TBCTL_bit.HSPCLKDIV = PWM_TBCTL_CLKDIV_Div1;      // ������ �������� ������� (��� �������)
-     PWM1->TBCTL_bit.CLKDIV = PWM_TBCTL_HSPCLKDIV_Div1;      // ������ �������� ������� (��� �������)
-     PWM1->TBCTL_bit.SYNCOSEL = TB_SYNC_IN;                  // ���������� ������-������ "��������"
-     PWM1->TBCTL_bit.FREESOFT = 2;                           // ���������� ���� ��� �������� �������� ����������
-     PWM1->TBCTL_bit.SHDWGLOB = 1;                           // ��������� ���������� ������ ������� ���������
+     PWM1->TBCTL_bit.PRDLD = TB_SHADOW;
+     PWM1->TBCTL_bit.CTRMODE = TB_COUNT_UPDOWN;
+     PWM1->TBCTL_bit.PHSEN = TB_ENABLE; // Phase enable
+     PWM1->TBCTL_bit.PHSDIR = TB_UP; // Count direction
+     PWM1->TBCTL_bit.HSPCLKDIV = PWM_TBCTL_CLKDIV_Div1;
+     PWM1->TBCTL_bit.CLKDIV = PWM_TBCTL_HSPCLKDIV_Div1;
+     PWM1->TBCTL_bit.SYNCOSEL = TB_SYNC_IN;
+     PWM1->TBCTL_bit.FREESOFT = 2; // Freeze on emulation
+     PWM1->TBCTL_bit.SHDWGLOB = 1; // Global shadow load
 
-     // ������� ��������, ��������� �������� ��������, ������ �����
+
       // TZ configuration same as PWM0
      PWM1->CMPCTL = PWM0->CMPCTL;
      PWM1->AQCTLA = PWM0->AQCTLA;
@@ -107,9 +107,9 @@ void PWM_Module_Init(void)
      PWM1->TZCTL = PWM0->TZCTL;
      PWM1->ETSEL = PWM0->ETSEL;
 
-     PWM1->AQSFRC_bit.RLDCSF = 0;                            // �� �� ���� ������ 0
+     PWM1->AQSFRC_bit.RLDCSF = 0;
 
-     // ��������� �������
+
      PWM1->CMPA_bit.CMPA = PWM0->CMPA_bit.CMPA;
      PWM1->CMPB_bit.CMPB = PWM0->CMPB_bit.CMPB;
 
@@ -118,13 +118,13 @@ void PWM_Module_Init(void)
  // ------------------------------------------------------------------------
      // Setup TBCLK
      PWM2->TBPRD = PWM0->TBPRD;
-     PWM2->TBPHS_bit.TBPHS = 0x0001;                         // ���� ����� 1 ��-�� �������� � ���� ���� �� �������������
+     PWM2->TBPHS_bit.TBPHS = 0x0001;
      PWM2->TBCTR = 0x0000;                                   // Clear counter
 
       // Configure time-base same as PWM1
      PWM2->TBCTL = PWM1->TBCTL;
 
-     // ������� ��������, ��������� �������� ��������, ������ �����
+
       // TZ configuration same as PWM0 and PWM1
      PWM2->CMPCTL = PWM0->CMPCTL;
      PWM2->AQCTLA = PWM0->AQCTLA;
@@ -134,11 +134,11 @@ void PWM_Module_Init(void)
      PWM2->TZCTL = PWM0->TZCTL;
      PWM2->ETSEL = PWM0->ETSEL;
 
-     // ��������� �������
+
      PWM2->CMPA_bit.CMPA = PWM0->CMPA_bit.CMPA;
      PWM2->CMPB_bit.CMPB = PWM0->CMPB_bit.CMPB;
 
-     PWM2->AQSFRC_bit.RLDCSF = 0;                            // �� �� ���� ������ 0
+     PWM2->AQSFRC_bit.RLDCSF = 0;
 
       // Configure compare registers
      //  PWM0->TZFRC_bit.OST = 1;
@@ -188,6 +188,9 @@ void PWM_HD_Protection_Init()
     PWM0->HDSEL_bit.OST = 1;
     PWM1->HDSEL_bit.OST = 1;
     PWM2->HDSEL_bit.OST = 1;
+    PWM0->HDSEL_bit.ADCDC0 = 1;
+    PWM1->HDSEL_bit.ADCDC1 = 1;
+    PWM2->HDSEL_bit.ADCDC2 = 1;
     NVIC_EnableIRQ(PWM2_HD_IRQn);
     NVIC_EnableIRQ(PWM1_HD_IRQn);
     NVIC_EnableIRQ(PWM0_HD_IRQn);
@@ -241,126 +244,105 @@ uint8_t ADC_DC_Overcurrent_Init()
 }
 
 
-void ADC_DC_IRQHandler(void)
-{
-    if (ADC->DCTRIG_bit.DCEV0) {
-        ADC->IC_bit.DCIC0 = 1;
-        //g_foc_state = STATE_OVERCURRENT_FAULT;
-    }
-    if (ADC->DCTRIG_bit.DCEV1) {
-        ADC->IC_bit.DCIC1 = 1;
-        //g_foc_state = STATE_OVERCURRENT_FAULT;
-    }
-    if (ADC->DCTRIG_bit.DCEV2) {
-        ADC->IC_bit.DCIC2 = 1;
-        //g_foc_state = STATE_OVERCURRENT_FAULT;
-    }
-    if (ADC->DCTRIG_bit.DCEV3) {
-        ADC->IC_bit.DCIC3 = 1;
-        //g_foc_state = STATE_OVERCURRENT_FAULT;
-    }
-    NVIC_ClearPendingIRQ(ADC_DC_IRQn);
-}
+// static adc_foc_config_t *g_adc_foc_cfg = NULL;
 
-static adc_foc_config_t *g_adc_foc_cfg = NULL;
+// void ADC_FOC_Init(const adc_foc_config_t *cfg)
+// {
+//     g_adc_foc_cfg = (adc_foc_config_t *)cfg;
 
-void ADC_FOC_Init(const adc_foc_config_t *cfg)
-{
-    g_adc_foc_cfg = (adc_foc_config_t *)cfg;
+//     RCU->ADCCFG_bit.CLKEN = 1;
+//     RCU->ADCCFG_bit.RSTDIS = 1;
+//     RCU->ADCCFG_bit.CLKSEL = 1;
+//     RCU->ADCCFG_bit.DIVEN = 1;
+//     RCU->ADCCFG_bit.DIVN = 2;
 
-    RCU->ADCCFG_bit.CLKEN = 1;
-    RCU->ADCCFG_bit.RSTDIS = 1;
-    RCU->ADCCFG_bit.CLKSEL = 1;
-    RCU->ADCCFG_bit.DIVEN = 1;
-    RCU->ADCCFG_bit.DIVN = 2;
+//     GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk | GPIO_DENSET_PIN3_Msk;
+//     GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk | GPIO_ALTFUNCSET_PIN3_Msk;
 
-    GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk | GPIO_DENSET_PIN3_Msk;
-    GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk | GPIO_ALTFUNCSET_PIN3_Msk;
+//     ADC->SEQEN_bit.SEQEN0 = 0;
 
-    ADC->SEQEN_bit.SEQEN0 = 0;
+//     ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
+//     ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
+//     ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
+//     ADC->SEQ[0].SRQSEL_bit.RQ3 = 3;
+//     ADC->SEQ[0].SRQCTL_bit.RQMAX = 3;
+//     ADC->SEQ[0].SRQCTL_bit.QAVGEN = 0;
+//     ADC->SEQ[0].SCCTL_bit.ICNT = 0;
+//     ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
+//     ADC->EMUX_bit.EM0 = 7;
 
-    ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
-    ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
-    ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
-    ADC->SEQ[0].SRQSEL_bit.RQ3 = 3;
-    ADC->SEQ[0].SRQCTL_bit.RQMAX = 3;
-    ADC->SEQ[0].SRQCTL_bit.QAVGEN = 0;
-    ADC->SEQ[0].SCCTL_bit.ICNT = 0;
-    ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
-    ADC->EMUX_bit.EM0 = 7;
+//     ADC->SEQ[0].SDC_bit.DC0 = 0;
+//     ADC->SEQ[0].SDC_bit.DC1 = 0;
+//     ADC->SEQ[0].SDC_bit.DC2 = 0;
+//     ADC->SEQ[0].SDC_bit.DC3 = 0;
 
-    ADC->SEQ[0].SDC_bit.DC0 = 0;
-    ADC->SEQ[0].SDC_bit.DC1 = 0;
-    ADC->SEQ[0].SDC_bit.DC2 = 0;
-    ADC->SEQ[0].SDC_bit.DC3 = 0;
+//     ADC->CHCTL[0].CHCTL_bit.OFFTRIM = 0;
+//     ADC->CHCTL[1].CHCTL_bit.OFFTRIM = 0;
+//     ADC->CHCTL[2].CHCTL_bit.OFFTRIM = 0;
+//     ADC->CHCTL[3].CHCTL_bit.OFFTRIM = 0;
 
-    ADC->CHCTL[0].CHCTL_bit.OFFTRIM = 0;
-    ADC->CHCTL[1].CHCTL_bit.OFFTRIM = 0;
-    ADC->CHCTL[2].CHCTL_bit.OFFTRIM = 0;
-    ADC->CHCTL[3].CHCTL_bit.OFFTRIM = 0;
+//     ADC->SEQEN_bit.SEQEN0 = 1;
+//     ADC->SEQSYNC_bit.SYNC0 = 1;
 
-    ADC->SEQEN_bit.SEQEN0 = 1;
-    ADC->SEQSYNC_bit.SYNC0 = 1;
+//     while (!ADC->ACTL_bit.ADCRDY);
 
-    while (!ADC->ACTL_bit.ADCRDY);
+//     if (cfg && cfg->dma_buffer && cfg->buffer_size > 0) {
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 0;
+//         DMA->CH[DMA_CH_ADCSEQ0].SRC = (uint32_t)&ADC->SEQ[0].SFIFO;
+//         DMA->CH[DMA_CH_ADCSEQ0].DST = (uint32_t)cfg->dma_buffer;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SIZE = cfg->buffer_size * 4;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_INC = 0;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_INC = 1;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_WIDTH = 2;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_WIDTH = 2;
+//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 1;
+//         ADC->SEQ[0].SDMACTL_bit.DMAEN = 1;
+//         ADC->SEQ[0].SDMACTL_bit.WMARK = 0;
+//     }
 
-    if (cfg && cfg->dma_buffer && cfg->buffer_size > 0) {
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 0;
-        DMA->CH[DMA_CH_ADCSEQ0].SRC = (uint32_t)&ADC->SEQ[0].SFIFO;
-        DMA->CH[DMA_CH_ADCSEQ0].DST = (uint32_t)cfg->dma_buffer;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SIZE = cfg->buffer_size * 4;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_INC = 0;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_INC = 1;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_WIDTH = 2;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_WIDTH = 2;
-        DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 1;
-        ADC->SEQ[0].SDMACTL_bit.DMAEN = 1;
-        ADC->SEQ[0].SDMACTL_bit.WMARK = 0;
-    }
+//     PWM0->ETSEL_bit.SOCASEL = 7;
+//     PWM0->ETSEL_bit.SOCAEN = 1;
+//     PWM0->ETPS_bit.SOCAPRD = 1;
+// }
 
-    PWM0->ETSEL_bit.SOCASEL = 7;
-    PWM0->ETSEL_bit.SOCAEN = 1;
-    PWM0->ETPS_bit.SOCAPRD = 1;
-}
+// void ADC_FOC_CaptureOffset(void)
+// {
+//     uint32_t sum[4] = {0};
+//     const uint32_t samples = 256;
 
-void ADC_FOC_CaptureOffset(void)
-{
-    uint32_t sum[4] = {0};
-    const uint32_t samples = 256;
+//     PWM0->ETSEL_bit.SOCAEN = 0;
 
-    PWM0->ETSEL_bit.SOCAEN = 0;
+//     ADC->EMUX_bit.EM0 = 0;
+//     ADC->SEQSYNC_bit.SYNC0 = 1;
 
-    ADC->EMUX_bit.EM0 = 0;
-    ADC->SEQSYNC_bit.SYNC0 = 1;
+//     for (uint32_t i = 0; i < samples; i++) {
+//         ADC->SEQSYNC_bit.SYNC0 = 1;
+//         while (ADC->SEQ[0].SFLOAD_bit.VAL < 4);
+//         for (int ch = 0; ch < 4; ch++) {
+//             sum[ch] += ADC->SEQ[0].SFIFO_bit.DATA;
+//         }
+//     }
 
-    for (uint32_t i = 0; i < samples; i++) {
-        ADC->SEQSYNC_bit.SYNC0 = 1;
-        while (ADC->SEQ[0].SFLOAD_bit.VAL < 4);
-        for (int ch = 0; ch < 4; ch++) {
-            sum[ch] += ADC->SEQ[0].SFIFO_bit.DATA;
-        }
-    }
+//     for (int ch = 0; ch < 3; ch++) {
+//         ADC->CHCTL[ch].CHCTL_bit.OFFTRIM = (int16_t)(2048 - (sum[ch] / samples));
+//     }
+//     ADC->CHCTL[3].CHCTL_bit.OFFTRIM = (int16_t)(2048 - (sum[3] / samples));
 
-    for (int ch = 0; ch < 3; ch++) {
-        ADC->CHCTL[ch].CHCTL_bit.OFFTRIM = (int16_t)(2048 - (sum[ch] / samples));
-    }
-    ADC->CHCTL[3].CHCTL_bit.OFFTRIM = (int16_t)(2048 - (sum[3] / samples));
+//     if (g_adc_foc_cfg) {
+//         g_adc_foc_cfg->current_offset = sum[0] / samples;
+//     }
 
-    if (g_adc_foc_cfg) {
-        g_adc_foc_cfg->current_offset = sum[0] / samples;
-    }
+//     ADC->EMUX_bit.EM0 = 7;
+//     PWM0->ETSEL_bit.SOCAEN = 1;
+// }
 
-    ADC->EMUX_bit.EM0 = 7;
-    PWM0->ETSEL_bit.SOCAEN = 1;
-}
+// void ADC_FOC_Start(void)
+// {
+//     PWM0->ETSEL_bit.SOCAEN = 1;
+// }
 
-void ADC_FOC_Start(void)
-{
-    PWM0->ETSEL_bit.SOCAEN = 1;
-}
-
-void ADC_FOC_Stop(void)
-{
-    PWM0->ETSEL_bit.SOCAEN = 0;
-}
+// void ADC_FOC_Stop(void)
+// {
+//     PWM0->ETSEL_bit.SOCAEN = 0;
+// }
 
