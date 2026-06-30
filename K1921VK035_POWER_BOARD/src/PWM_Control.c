@@ -199,26 +199,26 @@ void PWM_HD_Protection_Init()
 
 uint8_t ADC_DC_Overcurrent_Init()
 {
-    RCU->ADCCFG_bit.CLKEN = 1;
-    RCU->ADCCFG_bit.RSTDIS = 1;
-    RCU->ADCCFG_bit.CLKSEL = 1;
-    RCU->ADCCFG_bit.DIVEN = 1;
-    RCU->ADCCFG_bit.DIVN = 7;
+    // RCU->ADCCFG_bit.CLKEN = 1;
+    // RCU->ADCCFG_bit.RSTDIS = 1;
+    // RCU->ADCCFG_bit.CLKSEL = 2;
+    // //RCU->ADCCFG_bit.DIVEN = 1;
+    // //RCU->ADCCFG_bit.DIVN = 7;
 
-    GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk;
-    GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk;
+    // GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk;
+    // GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk;
 
-    ADC->SEQEN_bit.SEQEN0 = 0;
-    ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
-    ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
-    ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
-    ADC->SEQ[0].SRQCTL_bit.RQMAX = 2;
-    ADC->SEQ[0].SCCTL_bit.ICNT = 1;
-    ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
-    ADC->EMUX_bit.EM0 = 0;
+    // ADC->SEQEN_bit.SEQEN0 = 0;
+    // ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
+    // ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
+    // ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
+    // ADC->SEQ[0].SRQCTL_bit.RQMAX = 2;
+    // ADC->SEQ[0].SCCTL_bit.ICNT = 1;
+    // ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
+    // ADC->EMUX_bit.EM0 = 0;
 
     for (int i = 0; i < 3; i++) {
-        ADC->DC[i].DCTL_bit.SRC = 1;
+        ADC->DC[i].DCTL_bit.SRC = 0;
         ADC->DC[i].DCTL_bit.CHNL = i;
         ADC->DC[i].DCTL_bit.CIM = 0;
         ADC->DC[i].DCTL_bit.CIC = 0;
@@ -236,8 +236,8 @@ uint8_t ADC_DC_Overcurrent_Init()
     ADC->SEQ[0].SDC_bit.DC1 = 1;
     ADC->SEQ[0].SDC_bit.DC2 = 1;
 
-    ADC->SEQEN_bit.SEQEN0 = 1;
-    ADC->SEQSYNC_bit.SYNC0 = 1;
+    // ADC->SEQEN_bit.SEQEN0 = 1;
+    // ADC->SEQSYNC_bit.SYNC0 = 1;
 
     NVIC_EnableIRQ(ADC_DC_IRQn);
     return 1;
@@ -246,64 +246,84 @@ uint8_t ADC_DC_Overcurrent_Init()
 
 // static adc_foc_config_t *g_adc_foc_cfg = NULL;
 
-// void ADC_FOC_Init(const adc_foc_config_t *cfg)
-// {
-//     g_adc_foc_cfg = (adc_foc_config_t *)cfg;
+static volatile DMA_CtrlData_TypeDef dma_ctrl_data __attribute__((aligned(1024)));
 
-//     RCU->ADCCFG_bit.CLKEN = 1;
-//     RCU->ADCCFG_bit.RSTDIS = 1;
-//     RCU->ADCCFG_bit.CLKSEL = 1;
-//     RCU->ADCCFG_bit.DIVEN = 1;
-//     RCU->ADCCFG_bit.DIVN = 2;
+void ADC_FOC_Init(const adc_foc_config_t *cfg)
+{
 
-//     GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk | GPIO_DENSET_PIN3_Msk;
-//     GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk | GPIO_ALTFUNCSET_PIN3_Msk;
+    RCU->ADCCFG_bit.CLKEN = 1;
+    RCU->ADCCFG_bit.RSTDIS = 1;
+    RCU->ADCCFG_bit.CLKSEL = 2;
+    // RCU->ADCCFG_bit.DIVEN = 1;
+    // RCU->ADCCFG_bit.DIVN = 2;
 
-//     ADC->SEQEN_bit.SEQEN0 = 0;
+    GPIOB->DENSET = GPIO_DENSET_PIN0_Msk | GPIO_DENSET_PIN1_Msk | GPIO_DENSET_PIN2_Msk | GPIO_DENSET_PIN3_Msk;
+    GPIOB->ALTFUNCSET = GPIO_ALTFUNCSET_PIN0_Msk | GPIO_ALTFUNCSET_PIN1_Msk | GPIO_ALTFUNCSET_PIN2_Msk | GPIO_ALTFUNCSET_PIN3_Msk;
 
-//     ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
-//     ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
-//     ADC->SEQ[0].SRQSEL_bit.RQ2 = 2;
-//     ADC->SEQ[0].SRQSEL_bit.RQ3 = 3;
-//     ADC->SEQ[0].SRQCTL_bit.RQMAX = 3;
-//     ADC->SEQ[0].SRQCTL_bit.QAVGEN = 0;
-//     ADC->SEQ[0].SCCTL_bit.ICNT = 0;
-//     ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
-//     ADC->EMUX_bit.EM0 = 7;
+    ADC->SEQEN_bit.SEQEN0 = 0;
+    ADC->SEQEN_bit.SEQEN1 = 0;
 
-//     ADC->SEQ[0].SDC_bit.DC0 = 0;
-//     ADC->SEQ[0].SDC_bit.DC1 = 0;
-//     ADC->SEQ[0].SDC_bit.DC2 = 0;
-//     ADC->SEQ[0].SDC_bit.DC3 = 0;
+    ADC->SEQ[0].SRQSEL_bit.RQ0 = 0;
+    ADC->SEQ[0].SRQSEL_bit.RQ1 = 1;
+    ADC->SEQ[0].SRQCTL_bit.RQMAX = 1;
+    ADC->SEQ[0].SRQCTL_bit.QAVGEN = 0;
+    ADC->SEQ[0].SCCTL_bit.ICNT = 0;
+    ADC->SEQ[0].SCCTL_bit.RAVGEN = 0;
+    ADC->SEQ[0].SDMACTL_bit.DMAEN = 1;
+    ADC->SEQ[0].SDMACTL_bit.WMARK = 1;
+    ADC->EMUX_bit.EM0 = 8;
 
-//     ADC->CHCTL[0].CHCTL_bit.OFFTRIM = 0;
-//     ADC->CHCTL[1].CHCTL_bit.OFFTRIM = 0;
-//     ADC->CHCTL[2].CHCTL_bit.OFFTRIM = 0;
-//     ADC->CHCTL[3].CHCTL_bit.OFFTRIM = 0;
+    ADC->SEQ[1].SRQSEL_bit.RQ2 = 2;
+    ADC->SEQ[1].SRQSEL_bit.RQ3 = 3;
+    ADC->SEQ[1].SRQCTL_bit.RQMAX = 3;
+    ADC->SEQ[1].SRQCTL_bit.QAVGEN = 0;
+    ADC->SEQ[1].SCCTL_bit.ICNT = 0;
+    ADC->SEQ[1].SCCTL_bit.RAVGEN = 0;
+    ADC->SEQ[1].SDMACTL_bit.DMAEN = 1;
+    ADC->SEQ[1].SDMACTL_bit.WMARK = 1;
+    ADC->EMUX_bit.EM1 = 8;
 
-//     ADC->SEQEN_bit.SEQEN0 = 1;
-//     ADC->SEQSYNC_bit.SYNC0 = 1;
+    ADC->CHCTL[0].CHCTL_bit.OFFTRIM = 0;
+    ADC->CHCTL[1].CHCTL_bit.OFFTRIM = 0;
+    ADC->CHCTL[2].CHCTL_bit.OFFTRIM = 0;
+    ADC->CHCTL[3].CHCTL_bit.OFFTRIM = 0;
 
-//     while (!ADC->ACTL_bit.ADCRDY);
+    ADC->SEQEN_bit.SEQEN0 = 1;
+    ADC->SEQEN_bit.SEQEN1 = 1;
 
-//     if (cfg && cfg->dma_buffer && cfg->buffer_size > 0) {
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 0;
-//         DMA->CH[DMA_CH_ADCSEQ0].SRC = (uint32_t)&ADC->SEQ[0].SFIFO;
-//         DMA->CH[DMA_CH_ADCSEQ0].DST = (uint32_t)cfg->dma_buffer;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SIZE = cfg->buffer_size * 4;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_INC = 0;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_INC = 1;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.SRC_WIDTH = 2;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.DST_WIDTH = 2;
-//         DMA->CH[DMA_CH_ADCSEQ0].CTRL_bit.EN = 1;
-//         ADC->SEQ[0].SDMACTL_bit.DMAEN = 1;
-//         ADC->SEQ[0].SDMACTL_bit.WMARK = 0;
-//     }
+    while (!ADC->ACTL_bit.ADCRDY);
 
-//     PWM0->ETSEL_bit.SOCASEL = 7;
-//     PWM0->ETSEL_bit.SOCAEN = 1;
-//     PWM0->ETPS_bit.SOCAPRD = 1;
-// }
+    DMA->CFG_bit.MASTEREN = 1;
+    DMA->BASEPTR = (uint32_t)&dma_ctrl_data;
+
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.SRC_SIZE = DMA_CHANNEL_CFG_SRC_SIZE_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.DST_SIZE = DMA_CHANNEL_CFG_DST_SIZE_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.SRC_INC = DMA_CHANNEL_CFG_SRC_INC_None;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.DST_INC = DMA_CHANNEL_CFG_DST_INC_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.N_MINUS_1 = cfg->buffer_size - 1;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.R_POWER = 0;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].CHANNEL_CFG_bit.CYCLE_CTRL = DMA_CHANNEL_CFG_CYCLE_CTRL_Basic;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].SRC_DATA_END_PTR = (uint32_t)&ADC->SEQ[0].SFIFO;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ0].DST_DATA_END_PTR = (uint32_t)(cfg->dma_buffer + cfg->buffer_size - 1);
+    DMA->REQMASKSET_bit.CH4 = 1;
+    DMA->ENSET_bit.CH4 = 1;
+
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.SRC_SIZE = DMA_CHANNEL_CFG_SRC_SIZE_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.DST_SIZE = DMA_CHANNEL_CFG_DST_SIZE_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.SRC_INC = DMA_CHANNEL_CFG_SRC_INC_None;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.DST_INC = DMA_CHANNEL_CFG_DST_INC_Word;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.N_MINUS_1 = cfg->buffer_size - 1;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.R_POWER = 0;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].CHANNEL_CFG_bit.CYCLE_CTRL = DMA_CHANNEL_CFG_CYCLE_CTRL_Basic;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].SRC_DATA_END_PTR = (uint32_t)&ADC->SEQ[1].SFIFO;
+    dma_ctrl_data.PRM_DATA.CH[DMA_CH_ADCSEQ1].DST_DATA_END_PTR = (uint32_t)(cfg->dma_buffer + 2 * cfg->buffer_size - 1);
+    DMA->REQMASKSET_bit.CH5 = 1;
+    DMA->ENSET_bit.CH5 = 1;
+
+    PWM0->ETSEL_bit.SOCASEL = 7;
+    PWM0->ETSEL_bit.SOCAEN = 1;
+    PWM0->ETPS_bit.SOCAPRD = 1;
+}
 
 // void ADC_FOC_CaptureOffset(void)
 // {
